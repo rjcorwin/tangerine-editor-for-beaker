@@ -1,0 +1,17 @@
+{
+  "name": "beaker-ckeditor-site",
+  "authors": [
+    "R.J. Steinert <rj@rjsteinert.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
