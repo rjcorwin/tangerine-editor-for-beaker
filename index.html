@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html id="archiveDoc">
+<html>
     <head>
         <meta charset="utf-8">
-        <title>A Simple Page with CKEditor</title>
-        <!-- Make sure the path to CKEditor is correct. -->
+        <title>Tangy Beaker</title>
         <script src="ckeditor/ckeditor.js"></script>
         <script src="editor.js"></script>
         <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
@@ -19,7 +18,7 @@
       <button id="saveButton" onclick="save()">
         SAVE
       </button>
-      <div id="content" contenteditable="false">
+      <div id="pageContent" contenteditable="false">
 				Enter content here.
 				<tangy-form>
 				<div class="content">
@@ -45,35 +44,6 @@
 				</div>
 				</tangy-form>
       </div>
-			<script>
-			var editor;
-			CKEDITOR.on('instanceReady', function(ev) {
-					editor = ev.editor;
-					// you can also add more config for this instance of CKE here
-					// e.g. editor.setReadOnly(false);
-			});
-			function edit() {
-				// Turn off automatic editor creation first.
-				// CKEDITOR.disableAutoInline = true;
-        // CKEDITOR.allowedContent = true 
-        /*
-        CKEDITOR.allowedContent = {
-          "tangerine-section": true
-        }
-        */
-        let content = document.querySelector('#content');
-        let editButton = document.querySelector('#editButton');
-				if (content.contentEditable == "true") {
-					content.contentEditable = "false"
-					editor.destroy();
-					editButton.innerText = "EDIT"
-				} else {
-					content.contentEditable = "true"
-					CKEDITOR.inline( 'content' );
-					editButton.innerText = "PLAY"
-				}
-			}
-			</script>
       
     </body>
 </html>
