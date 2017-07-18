@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>A Simple Page with CKEditor</title>
         <!-- Make sure the path to CKEditor is correct. -->
-        <script src="bower_components/ckeditor/ckeditor.js"></script>
+        <script src="ckeditor/ckeditor.js"></script>
         <script src="editor.js"></script>
         <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
         <link rel="import" href="/bower_components/polymer/polymer.html">
@@ -13,7 +13,33 @@
         <link rel="import" href="/bower_components/tangy-hide-if/tangy-hide-if.html">
     </head>
     <body onload="initializeSaving()">
-      <div id="content" contenteditable="true">Hello inline.</div>
+      <button id="editButton" onclick="edit()">
+				EDIT
+			</button>
+      <div id="content" contenteditable="false">Hello inline.</div>
+			<script>
+			var editor;
+			CKEDITOR.on('instanceReady', function(ev) {
+					editor = ev.editor;
+					// you can also add more config for this instance of CKE here
+					// e.g. editor.setReadOnly(false);
+			});
+			function edit() {
+				// Turn off automatic editor creation first.
+				CKEDITOR.disableAutoInline = true;
+        let content = document.querySelector('#content');
+        let editButton = document.querySelector('#editButton');
+				if (content.contentEditable == "true") {
+					content.contentEditable = "false"
+					editor.destroy();
+					editButton.innerText = "EDIT"
+				} else {
+					content.contentEditable = "true"
+					CKEDITOR.inline( 'content' );
+					editButton.innerText = "PLAY"
+				}
+			}
+			</script>
       <tangy-form>
         <form>
         baz
