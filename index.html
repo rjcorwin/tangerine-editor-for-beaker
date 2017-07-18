@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,33 +19,36 @@
       <button id="saveButton" onclick="save()">
         SAVE
       </button>
-      <div id="pageContent" contenteditable="false">
-				Enter content here.
-				<tangy-form>
-				<div class="content">
-				<p>Add sections...</p>
-				<tangy-section>
-				<div class="content">
-				<p>Add form elements...</p>
+<div id="pageContent" contenteditable="false" style="position: relative;"><p>&nbsp;</p>
+<tangy-form>
+<div class="content">
+<p>&nbsp;</p>
+<tangy-section>
+<div class="content">
+<p>Would you like to answer a fruity question?</p>
 
-				<p><select id="foo" name="foo"><option value="yes">yes</option><option value="no">no</option></select></p>
-				<tangy-hide-if condition="newValue.foo == 'no'" style="display: block;">
-				<div class="content">
-				<p>Add form elements...</p>
+<p><select id="fruity_prompt" name="fruity_prompt"><option selected="selected" value=""></option><option value="yes">yes</option><option value="no">no</option></select></p>
+<tangy-hide-if condition="newValue.fruity_prompt !== 'yes'" style="display: block;">
+<div class="content">
+<p>What is your favorite fruit?</p>
 
-				<p><input id="bar" name="bar" type="text"></p>
-				</div>
-				</tangy-hide-if>
+<p><select id="favorite_fruit" name="favorite_fruit"><option selected="selected" value=""></option><option value="apple">apple</option><option value="banana">banana</option><option value="tangerine">tangerine</option></select></p>
+</div>
+</tangy-hide-if>
 
-				<p>&nbsp;</p>
-				</div>
-				</tangy-section>
+<p>&nbsp;</p>
+</div>
+</tangy-section>
 
-				<p>&nbsp;</p>
-				</div>
-				</tangy-form>
-      </div>
-      
+<p>&nbsp;</p>
+</div>
+</tangy-form>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+</div>
     </body>
 </html>
-
