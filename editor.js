@@ -62,7 +62,7 @@ function edit() {
   } else {
     content.contentEditable = "true"
     CKEDITOR.inline( 'pageContent' );
-    editButton.innerText = "PLAY"
+    editButton.innerText = "VIEW"
     saveButton.disabled = true 
     publishButton.disabled = true 
   }
