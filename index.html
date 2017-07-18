@@ -22,7 +22,7 @@
       <button id="publishButton" onclick="publish()">
         PUBLISH 
       </button>
-<div id="pageContent" contenteditable="false" style="position: relative;"><p>&nbsp;</p>
+<div id="pageContent" contenteditable="false" style="position: relative;"><h1>A Tangy Form Example</h1>
 <tangy-form>
 <div class="content">
 <p>&nbsp;</p>
@@ -31,7 +31,7 @@
 <p>Would you like to answer a fruity question?</p>
 
 <p><select id="fruity_prompt" name="fruity_prompt"><option selected="selected" value=""></option><option value="yes">yes</option><option value="no">no</option></select></p>
-<tangy-hide-if condition="newValue.fruity_prompt !== 'yes'" style="display: block;">
+<tangy-hide-if condition="newValue.fruity_prompt !== 'yes'" style="display: none;">
 <div class="content">
 <p>What is your favorite fruit?</p>
 
@@ -46,10 +46,6 @@
 <p>&nbsp;</p>
 </div>
 </tangy-form>
-
-<p>&nbsp;</p>
-
-<p>&nbsp;</p>
 
 <p>&nbsp;</p>
 </div>
