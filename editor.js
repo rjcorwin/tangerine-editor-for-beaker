@@ -16,26 +16,30 @@ async function save() {
   saveButton.innerText = 'SAVING...'
   saveButton.disabled = true
   let page = (document.getElementById('pageContent')).outerHTML
-  await selfArchive.writeFile('/index.html', templateTop + state + templateBottom, 'utf8')
-  saveButton.innerText = 'SAVE'
-  saveButton.disabled = false 
+  await selfArchive.writeFile('/index.html', templateTop + page + templateBottom, 'utf8')
+  setTimeout(() => {
+    saveButton.innerText = 'SAVE'
+    saveButton.disabled = false 
+  }, 1000)
 }
 
 async function publish() {
   let publishButton = document.querySelector('#publishButton');
-  saveButton.innerText = 'PUBLISHING...'
-  saveButton.disabled = true
+  publishButton.innerText = 'PUBLISHING...'
+  publishButton.disabled = true
   await selfArchive.commit()
-  saveButton.innerText = 'PUBLISH'
-  saveButton.disabled = false
+  publishButton.innerText = 'PUBLISH'
+  publishButton.disabled = false
 }
 
+// Get the editor instance after it is created so we can destroy it when leaving edit mode.
 var editor;
 CKEDITOR.on('instanceReady', function(ev) {
     editor = ev.editor;
     // you can also add more config for this instance of CKE here
     // e.g. editor.setReadOnly(false);
 });
+
 function edit() {
   // Turn off automatic editor creation first.
   // CKEDITOR.disableAutoInline = true;
@@ -48,16 +52,19 @@ function edit() {
   let content = document.querySelector('#pageContent');
   let editButton = document.querySelector('#editButton');
   let saveButton = document.querySelector('#saveButton');
+  let publishButton = document.querySelector('#publishButton');
   if (content.contentEditable == "true") {
     content.contentEditable = "false"
     editor.destroy();
     editButton.innerText = "EDIT"
     saveButton.disabled = false 
+    publishButton.disabled = false 
   } else {
     content.contentEditable = "true"
     CKEDITOR.inline( 'pageContent' );
     editButton.innerText = "PLAY"
     saveButton.disabled = true 
+    publishButton.disabled = true 
   }
 }
 
