@@ -38,7 +38,7 @@ CKEDITOR.plugins.add( 'tangy-hide-if', {
 			// Define two nested editable areas.
 			editables: {
 				content: {
-					selector: 'tangy-hide-if',
+					selector: '.content',
 					// allowedContent: 'p br ul ol li strong em tangy-hide-if'
 				}
 			},
@@ -46,8 +46,8 @@ CKEDITOR.plugins.add( 'tangy-hide-if', {
 			// Define the template of a new Simple Box widget.
 			// The template will be used when creating new instances of the Simple Box widget.
 			template:
-				'<tangy-hide-if condition="false"> Add form elements...' +
-				'</tangy-hide-if>',
+				'<tangy-hide-if condition="false"> <div class="content">Add form elements...' +
+				'</div></tangy-hide-if>',
 
 			// Define the label for a widget toolbar button which will be automatically
 			// created by the Widgets System. This button will insert a new widget instance
