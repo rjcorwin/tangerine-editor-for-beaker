@@ -12,15 +12,22 @@ function initializeSaving() {
 
 async function save() {
   // Check if state is stale.
-  if (state !== (document.getElementById('pageContent')).outerHTML) {
-    state = (document.getElementById('pageContent')).outerHTML
-    await selfArchive.writeFile('/index.html', templateTop + state + templateBottom, 'utf8')
-    console.log('wrote to disk')
-    await selfArchive.commit()
-    console.log('committed to archive')
-    commitCounter++
-    console.log('commit count: ' + commitCounter)
-  }
+  let saveButton = document.querySelector('#saveButton');
+  saveButton.innerText = 'SAVING...'
+  saveButton.disabled = true
+  let page = (document.getElementById('pageContent')).outerHTML
+  await selfArchive.writeFile('/index.html', templateTop + state + templateBottom, 'utf8')
+  saveButton.innerText = 'SAVE'
+  saveButton.disabled = false 
+}
+
+async function publish() {
+  let publishButton = document.querySelector('#publishButton');
+  saveButton.innerText = 'PUBLISHING...'
+  saveButton.disabled = true
+  await selfArchive.commit()
+  saveButton.innerText = 'PUBLISH'
+  saveButton.disabled = false
 }
 
 var editor;
@@ -40,14 +47,17 @@ function edit() {
   */
   let content = document.querySelector('#pageContent');
   let editButton = document.querySelector('#editButton');
+  let saveButton = document.querySelector('#saveButton');
   if (content.contentEditable == "true") {
     content.contentEditable = "false"
     editor.destroy();
     editButton.innerText = "EDIT"
+    saveButton.disabled = false 
   } else {
     content.contentEditable = "true"
     CKEDITOR.inline( 'pageContent' );
     editButton.innerText = "PLAY"
+    saveButton.disabled = true 
   }
 }
 
@@ -71,6 +81,9 @@ var templateTop = `
 			</button>
       <button id="saveButton" onclick="save()">
         SAVE
+      </button>
+      <button id="publishButton" onclick="publish()">
+        PUBLISH 
       </button>
 ` 
 
