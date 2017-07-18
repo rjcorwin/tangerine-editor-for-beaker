@@ -16,7 +16,32 @@
       <button id="editButton" onclick="edit()">
 				EDIT
 			</button>
-      <div id="content" contenteditable="false">Hello inline.</div>
+      <div id="content" contenteditable="false">
+				Enter content here.
+				<tangy-form>
+				<div class="content">
+				<p>Add sections...</p>
+				<tangy-section>
+				<div class="content">
+				<p>Add form elements...</p>
+
+				<p><select id="foo" name="foo"><option value="yes">yes</option><option value="no">no</option></select></p>
+				<tangy-hide-if condition="newValue.foo == 'no'" style="display: block;">
+				<div class="content">
+				<p>Add form elements...</p>
+
+				<p><input id="bar" name="bar" type="text"></p>
+				</div>
+				</tangy-hide-if>
+
+				<p>&nbsp;</p>
+				</div>
+				</tangy-section>
+
+				<p>&nbsp;</p>
+				</div>
+				</tangy-form>
+      </div>
 			<script>
 			var editor;
 			CKEDITOR.on('instanceReady', function(ev) {
@@ -26,7 +51,13 @@
 			});
 			function edit() {
 				// Turn off automatic editor creation first.
-				CKEDITOR.disableAutoInline = true;
+				// CKEDITOR.disableAutoInline = true;
+        // CKEDITOR.allowedContent = true 
+        /*
+        CKEDITOR.allowedContent = {
+          "tangerine-section": true
+        }
+        */
         let content = document.querySelector('#content');
         let editButton = document.querySelector('#editButton');
 				if (content.contentEditable == "true") {
@@ -40,28 +71,7 @@
 				}
 			}
 			</script>
-      <tangy-form>
-        <form>
-        baz
-        <tangy-section>
-          <label>
-            Would you like to continue?
-            <select type="text" id="variable1">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </label>
-          </label>
-          <tangy-hide-if condition="newValue.variable1 !== 'yes'">
-            <label>
-              What is your name?
-              <input type="text" id="variable2"/>
-            </label>
-          </tangy-hide-if>
-        </tangy-section>
-      </form>
-    </tangy-form>
-
+      
     </body>
 </html>
 

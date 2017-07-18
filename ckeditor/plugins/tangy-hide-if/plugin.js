@@ -9,45 +9,45 @@
  */
 
 // Register the plugin within the editor.
-CKEDITOR.plugins.add( 'tangy-section', {
+CKEDITOR.plugins.add( 'tangy-hide-if', {
 	// This plugin requires the Widgets System defined in the 'widget' plugin.
 	requires: 'widget',
 
 	// Register the icon used for the toolbar button. It must be the same
 	// as the name of the widget.
-	icons: 'tangy-section',
+	icons: 'tangy-hide-if',
 
 	// The plugin initialization logic goes inside this method.
 	init: function( editor ) {
 		// Register the editing dialog.
-		CKEDITOR.dialog.add( 'tangy-section', this.path + 'dialogs/tangy-section.js' );
+		CKEDITOR.dialog.add( 'tangy-hide-if', this.path + 'dialogs/tangy-hide-if.js' );
 
-		// Register the tangy-section widget.
-		editor.widgets.add( 'tangy-section', {
+		// Register the tangy-hide-if widget.
+		editor.widgets.add( 'tangy-hide-if', {
 			// Allow all HTML elements, classes, and styles that this widget requires.
 			// Read more about the Advanced Content Filter here:
 			// * http://docs.ckeditor.com/#!/guide/dev_advanced_content_filter
 			// * http://docs.ckeditor.com/#!/guide/plugin_sdk_integration_with_acf
 			allowedContent:
-				'div(!tangy-section,align-left,align-right,align-center){width};' +
-				'div(!tangy-section-content); h2(!tangy-section-title)',
+				'div(!tangy-hide-if,align-left,align-right,align-center){width};' +
+				'div(!tangy-hide-if-content); h2(!tangy-hide-if-title)',
 
 			// Minimum HTML which is required by this widget to work.
-			requiredContent: 'div(tangy-section)',
+			requiredContent: 'div(tangy-hide-if)',
 
 			// Define two nested editable areas.
 			editables: {
 				content: {
 					selector: '.content',
-					// allowedContent: 'p br ul ol li strong em tangy-section'
+					// allowedContent: 'p br ul ol li strong em tangy-hide-if'
 				}
 			},
 
 			// Define the template of a new Simple Box widget.
 			// The template will be used when creating new instances of the Simple Box widget.
 			template:
-				'<tangy-section> <div class="content"> Add form elements...' +
-				'</div></tangy-section>',
+				'<tangy-hide-if condition="false"> <div class="content"> Add form elements...' +
+				'</div></tangy-hide-if>',
 
 			// Define the label for a widget toolbar button which will be automatically
 			// created by the Widgets System. This button will insert a new widget instance
@@ -55,12 +55,12 @@ CKEDITOR.plugins.add( 'tangy-section', {
 			// (see second part of this tutorial to learn about editing widgets).
 			//
 			// Note: In order to be able to translate your widget you should use the
-			// editor.lang.tangy-section.* property. A string was used directly here to simplify this tutorial.
-			button: 'Create a tangy-section',
+			// editor.lang.tangy-hide-if.* property. A string was used directly here to simplify this tutorial.
+			button: 'Create a tangy-hide-if',
 
 			// Set the widget dialog window name. This enables the automatic widget-dialog binding.
 			// This dialog window will be opened when creating a new widget or editing an existing one.
-			dialog: 'tangy-section',
+			dialog: 'tangy-hide-if',
 
 			// Check the elements that need to be converted to widgets.
 			//
@@ -69,24 +69,19 @@ CKEDITOR.plugins.add( 'tangy-section', {
 			// during data processing which is done on DOM represented by JavaScript objects.
 			upcast: function( element ) {
 				// Return "true" (that element needs to converted to a Simple Box widget)
-				// for all <div> elements with a "tangy-section" class.
-				return element.name == 'tangy-section' ;
+				// for all "tangy-hide-if" elements.
+				return element.name == 'tangy-hide-if' ;
 			},
+			downcast: function( element ) {
+      },
 
 			// When a widget is being initialized, we need to read the data ("align" and "width")
 			// from DOM and set it by using the widget.setData() method.
 			// More code which needs to be executed when DOM is available may go here.
 			init: function() {
-				var width = this.element.getStyle( 'width' );
-				if ( width )
-					this.setData( 'width', width );
-
-				if ( this.element.hasClass( 'align-left' ) )
-					this.setData( 'align', 'left' );
-				if ( this.element.hasClass( 'align-right' ) )
-					this.setData( 'align', 'right' );
-				if ( this.element.hasClass( 'align-center' ) )
-					this.setData( 'align', 'center' );
+				var condition = this.element.getAttribute('condition');
+				if ( condition )
+					this.setData( 'condition', condition );
 			},
 
 			// Listen on the widget#data event which is fired every time the widget data changes
@@ -94,19 +89,7 @@ CKEDITOR.plugins.add( 'tangy-section', {
 			// Data may be changed by using the widget.setData() method, which we use in the
 			// Simple Box dialog window.
 			data: function() {
-				// Check whether "width" widget data is set and remove or set "width" CSS style.
-				// The style is set on widget main element (div.tangy-section).
-				if ( this.data.width == '' )
-					this.element.removeStyle( 'width' );
-				else
-					this.element.setStyle( 'width', this.data.width );
-
-				// Brutally remove all align classes and set a new one if "align" widget data is set.
-				this.element.removeClass( 'align-left' );
-				this.element.removeClass( 'align-right' );
-				this.element.removeClass( 'align-center' );
-				if ( this.data.align )
-					this.element.addClass( 'align-' + this.data.align );
+        this.element.setAttribute('condition', this.data.condition)
 			}
 		} );
 	}

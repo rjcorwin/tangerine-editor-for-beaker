@@ -10,7 +10,7 @@
 
 CKEDITOR.dialog.add( 'tangy-form', function( editor ) {
 	return {
-		title: 'Edit Simple Box',
+		title: 'Edit Tangy Form',
 		minWidth: 200,
 		minHeight: 100,
 		contents: [
