@@ -38,7 +38,7 @@ CKEDITOR.plugins.add( 'tangy-hide-if', {
 			// Define two nested editable areas.
 			editables: {
 				content: {
-					selector: '.content',
+					selector: 'tangy-hide-if',
 					// allowedContent: 'p br ul ol li strong em tangy-hide-if'
 				}
 			},
@@ -46,8 +46,8 @@ CKEDITOR.plugins.add( 'tangy-hide-if', {
 			// Define the template of a new Simple Box widget.
 			// The template will be used when creating new instances of the Simple Box widget.
 			template:
-				'<tangy-hide-if condition="false"> <div class="content"> Add form elements...' +
-				'</div></tangy-hide-if>',
+				'<tangy-hide-if condition="false"> Add form elements...' +
+				'</tangy-hide-if>',
 
 			// Define the label for a widget toolbar button which will be automatically
 			// created by the Widgets System. This button will insert a new widget instance
@@ -68,20 +68,22 @@ CKEDITOR.plugins.add( 'tangy-hide-if', {
 			// so it is not a real DOM element yet. This is caused by the fact that upcasting is performed
 			// during data processing which is done on DOM represented by JavaScript objects.
 			upcast: function( element ) {
-				// Return "true" (that element needs to converted to a Simple Box widget)
+				// Return "true" (that element needs to converted to a widget)
 				// for all "tangy-hide-if" elements.
 				return element.name == 'tangy-hide-if' ;
 			},
 			downcast: function( element ) {
       },
 
-			// When a widget is being initialized, we need to read the data ("align" and "width")
-			// from DOM and set it by using the widget.setData() method.
-			// More code which needs to be executed when DOM is available may go here.
+			// When a widget is being initialized for editing, we need to read the the condition property and set to data 
 			init: function() {
 				var condition = this.element.getAttribute('condition');
-				if ( condition )
+				if ( condition ) {
 					this.setData( 'condition', condition );
+        }
+        // It may be in a state that causes it to hide when editiing, force it to show.
+        this.element.setAttribute('condition', 'false')
+
 			},
 
 			// Listen on the widget#data event which is fired every time the widget data changes
@@ -89,6 +91,7 @@ CKEDITOR.plugins.add( 'tangy-hide-if', {
 			// Data may be changed by using the widget.setData() method, which we use in the
 			// Simple Box dialog window.
 			data: function() {
+        // TODO: Should happen on destroy?
         this.element.setAttribute('condition', this.data.condition)
 			}
 		} );
