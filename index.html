@@ -6,9 +6,36 @@
         <!-- Make sure the path to CKEditor is correct. -->
         <script src="bower_components/ckeditor/ckeditor.js"></script>
         <script src="editor.js"></script>
+        <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+        <link rel="import" href="/bower_components/polymer/polymer.html">
+        <link rel="import" href="/bower_components/tangy-form/tangy-form.html">
+        <link rel="import" href="/bower_components/tangy-section/tangy-section.html">
+        <link rel="import" href="/bower_components/tangy-hide-if/tangy-hide-if.html">
     </head>
     <body onload="initializeSaving()">
       <div id="content" contenteditable="true">Hello inline.</div>
+      <tangy-form>
+        <form>
+        baz
+        <tangy-section>
+          <label>
+            Would you like to continue?
+            <select type="text" id="variable1">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          </label>
+          <tangy-hide-if condition="newValue.variable1 !== 'yes'">
+            <label>
+              What is your name?
+              <input type="text" id="variable2"/>
+            </label>
+          </tangy-hide-if>
+        </tangy-section>
+      </form>
+    </tangy-form>
+
     </body>
 </html>
 

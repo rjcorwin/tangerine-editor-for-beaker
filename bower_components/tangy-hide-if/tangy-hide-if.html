@@ -1,0 +1,65 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="tangy-hide-if">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <slot></slot>
+  </template>
+
+  <script>
+    /**
+     * `tangy-hide-if`
+     * Takes a condition in a condition property and sets display none if condition returns true
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TangyHideIf extends Polymer.Element {
+      static get is() { return 'tangy-hide-if'; }
+      static get properties() {
+        return {
+          condition: {
+            type: String,
+            value: ''
+          },
+          tangyModel: {
+            type: String,
+            value: {},
+            observer: '_tangyModelChange'
+          }
+        };
+      }
+      _tangyModelChange(newValue, oldValue) {
+        // Observers get called early, protect against change events that happen
+        // before TangerineForm can spread the model out.
+        if (this.hasOwnProperty('initialized')) {
+          try {
+            newValue = JSON.parse(newValue)
+          }
+          catch (e) {
+            newValue = {}
+          }
+          this._tangyModel = newValue
+          let shouldHide = false;
+          eval(`if (${this.condition}) { shouldHide = true}`)
+          if (shouldHide) {
+            console.log('hiding!')
+            this.style.display = 'none'
+          } else {
+            this.style.display = 'block'
+          }
+        } else {
+          this.initialized = true
+        }
+
+      }
+    }
+
+    window.customElements.define(TangyHideIf.is, TangyHideIf);
+  </script>
+</dom-module>

@@ -1,0 +1,110 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="tangy-form">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+      <slot></slot>
+  </template>
+
+  <script>
+    /**
+     * `tangy-form`
+     * An HTML form with special tangy powers.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TangyForm extends Polymer.Element {
+
+      static get is() { return 'tangy-form'; }
+      ready() {
+        super.ready();
+        this.tangyModel = {}
+        this.formElements = this.findAllFormElements()
+        this.tangyElements = this.findAllTangyElements()
+        this.formElements.forEach((el) => this.tangyModel[el.id] = '')
+        this.formElements.forEach((el) => el.addEventListener('change', (el) => this.onChange(el), false))
+      }
+
+      onChange(el) {
+        const action = {
+          action: 'TANGY_FORM_ELEMENT_CHANGE',
+          payload: {
+            id: el.currentTarget.id,
+            value: el.currentTarget.value
+          }
+        };
+        // TODO: Reduxify.
+        console.log(JSON.stringify(action))
+
+        /* TODO: Get form values using native methods.
+        let form = (this.querySelectorAll('form'))[0]
+        let data = new FormData(form)
+        console.log(data)
+        debugger;
+        */
+
+        // Update the tangyModel.
+        this.tangyModel[el.currentTarget.id] = el.currentTarget.value;
+
+        // Pass the updated tangyModel down to tangy elements.
+        this.tangyElements.forEach( (el) => el.tangyModel = JSON.stringify(this.tangyModel))
+
+      }
+
+      findAllTangyElements() {
+        var allTangyElements = [];
+        function isTangyElement(el) {
+          if (el.localName.includes('tangy-')) {
+            return true
+          }
+        }
+        function findAllTangyElements(nodes) {
+          for (let i = 0, el; el = nodes[i]; ++i) {
+            if (isTangyElement(el)) {
+              allTangyElements.push(el)
+            }
+            // If the element has shadow DOM, dig deeper.
+            if (el.shadowRoot) {
+              findAllTangyElements(el.shadowRoot.querySelectorAll('*'))
+            }
+          }
+        }
+        findAllTangyElements(this.querySelectorAll('*'));
+        return allTangyElements;
+      }
+
+      //
+      // Form element search. Inspired by https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom?hl=en#findall
+      //
+      findAllFormElements() {
+        var allFormElements = [];
+        function isFormElement(el) {
+          if (el.localName == 'input' || el.localName == 'select' || el.localName == 'radio') {
+            return true
+          }
+        }
+        function findAllFormElements(nodes) {
+          for (let i = 0, el; el = nodes[i]; ++i) {
+            if (isFormElement(el)) {
+              allFormElements.push(el);
+            }
+            // If the element has shadow DOM, dig deeper.
+            if (el.shadowRoot) {
+              findAllFormElements(el.shadowRoot.querySelectorAll('*'));
+            }
+          }
+        }
+        findAllFormElements(this.querySelectorAll('*'));
+        return allFormElements;
+      }
+
+    }
+    window.customElements.define(TangyForm.is, TangyForm);
+  </script>
+</dom-module>

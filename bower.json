@@ -13,5 +13,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "webcomponentsjs": "^1.0.3",
+    "paper-card": "PolymerElements/paper-card#^2.0.0"
+  }
 }
