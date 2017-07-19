@@ -1,19 +1,14 @@
-# beaker-wiki
-Edit a webpage directly in your Beaker Browser.
+# tangerine-editor-for-beaker 
+Edit Tangerine Forms directly in your Beaker Browser.
 
 Live Demo:
-- https://beaker-wiki-rjsteinert.hashbase.io/
-- dat://beaker-wiki-rjsteinert.hashbase.io/
-- dat://65492addcd9ac6150362b849cd4efdb3f326e70ca995a2680ebdefd72c7ab26c/
+- dat://a5e524b876fb6df350ba7feb2a6f99b8ee1737236c3120b2773a38c07bd13616/
+- dat://tangerine-editor-for-beaker--rjsteinert.hashbase.io 
+- https://tangerine-editor-for-beaker--rjsteinert.hashbase.io
 
-## Get going
-```
-bower install
-dat share
-```
+To edit your own forms, open one of those URLs in Beaker browser, fork it, then click edit. When finished editing, click "View", then "Save" to write to disk, and lastly "Publish" to make your changes live.
 
 ## Credit
-
 - orange icon by Blair Adams from the Noun Project https://thenounproject.com/term/orange/960665/
 - mandarin icon by Arianna Sbaffi from the Noun Project https://thenounproject.com/term/mandarin/712204/
 - hidden logo by hidden by Gregor Cresnar from the Noun Project https://thenounproject.com/search/?q=hide&i=1015698
