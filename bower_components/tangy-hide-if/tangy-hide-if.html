@@ -36,6 +36,7 @@
       }
       connectedCallback() {
         super.connectedCallback()
+        this.style.display = 'none'
       }
       _tangyModelChange(newValue, oldValue) {
         // Observers get called early, protect against change events that happen
