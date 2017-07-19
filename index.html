@@ -31,11 +31,40 @@
 <p>Would you like to answer a fruity question?</p>
 
 <p><select id="fruity_prompt" name="fruity_prompt"><option selected="selected" value=""></option><option value="yes">yes</option><option value="no">no</option></select></p>
-<tangy-hide-if condition="newValue.fruity_prompt !== 'yes'" style="display: none;">
+<tangy-hide-if condition="newValue.fruity_prompt !== 'yes'" style="display: block;">
 <div class="content">
-<p>What is your favorite fruit?</p>
+<p>What are some of your favorite fruits?</p>
 
-<p><select id="favorite_fruit" name="favorite_fruit"><option selected="selected" value=""></option><option value="apple">apple</option><option value="banana">banana</option><option value="tangerine">tangerine</option></select></p>
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px;">
+	<tbody>
+		<tr>
+			<td><input name="tangerine" type="checkbox" value="tangerine">tangerine</td>
+			<td><input name="banana" type="checkbox" value="banana">banana</td>
+			<td><input name="kiwi" type="checkbox" value="kiwi">kiwi</td>
+			<td><input name="peach" type="checkbox" value="peach">peach</td>
+		</tr>
+		<tr>
+			<td><input name="apple" type="checkbox" value="apple">apple</td>
+			<td><input name="cherries" type="checkbox" value="cherries">cherries</td>
+			<td><input name="watermelon" type="checkbox" value="watermelon">watermelon</td>
+			<td><input name="pineapple" type="checkbox" value="pineapple">pineapple</td>
+		</tr>
+		<tr>
+			<td><input name="lemon" type="checkbox" value="lemon">lemon</td>
+			<td><input name="lime" type="checkbox" value="lime">lime</td>
+			<td><input name="coconut" type="checkbox" value="coconut">coconut</td>
+			<td><input name="starfruit" type="checkbox" value="starfruit">starfruit</td>
+		</tr>
+		<tr>
+			<td><input name="jack fruit" type="checkbox" value="jack fruit">jack fruit</td>
+			<td><input name="pear" type="checkbox" value="pear">pear</td>
+			<td><input name="strawberry" type="checkbox" value="strawberry">strawberry</td>
+			<td><input name="mango" type="checkbox" value="mango">mango</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
 </div>
 </tangy-hide-if>
 
@@ -49,6 +78,5 @@
 
 <p>&nbsp;</p>
 </div>
-
     </body>
 </html>
