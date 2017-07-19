@@ -35,5 +35,5 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 
-  config.extraPlugins = 'tangy-hide-if,tangy-form,tangy-section'
+  config.extraPlugins = 'tangy-hide-if,tangy-form,tangy-section,html5validation'
 };

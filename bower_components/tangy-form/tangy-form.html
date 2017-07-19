@@ -28,7 +28,7 @@
         this.formElements = this.findAllFormElements()
         this.tangyElements = this.findAllTangyElements()
         this.formElements.forEach((el) => this.tangyModel[el.id] = '')
-        this.formElements.forEach((el) => el.addEventListener('change', (el) => this.onChange(el), false))
+        this.formElements.forEach((el) => el.addEventListener('input', (el) => this.onChange(el), false))
       }
 
       onChange(el) {

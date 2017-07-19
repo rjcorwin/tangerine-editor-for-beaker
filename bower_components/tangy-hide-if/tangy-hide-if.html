@@ -34,6 +34,9 @@
           }
         };
       }
+      connectedCallback() {
+        super.connectedCallback()
+      }
       _tangyModelChange(newValue, oldValue) {
         // Observers get called early, protect against change events that happen
         // before TangerineForm can spread the model out.
